@@ -5,7 +5,7 @@ import { Amenities } from "../utils/Amenities";
 import '../styles/Home.css';
 
 export default function Home() {
-  const { setFav, fav, listings, remove } = useListingStore();
+  const { setFav, fav, listings } = useListingStore();
   const [imageIndices, setImageIndices] = useState<number[]>([]);
   // State for filters
   const [filterTitle, setFilterTitle] = useState('');
