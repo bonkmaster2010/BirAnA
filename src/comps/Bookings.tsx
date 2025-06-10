@@ -11,12 +11,13 @@ export default function Bookings() {
   }
 
   return (
-    <div className="Home-cont">
-      {bookings.length === 0 && (
+    <>  
+    {bookings.length === 0 && (
         <h2 style={{ textAlign: "center", opacity: "0.7" }}>
           No Bookings Found 🥀
         </h2>
       )}
+    <div className="Home-cont">
       {bookings.length > 0 &&
         bookings.map((book, i) => {
           return (
@@ -42,5 +43,6 @@ export default function Bookings() {
           );
         })}
     </div>
+    </>
   );
 }

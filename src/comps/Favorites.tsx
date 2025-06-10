@@ -31,53 +31,53 @@ export default function Favorites() {
 
   return ( 
     <>
-        <h1 id="fav-title">Favorites</h1>
-    <div className="Home-cont">
-      {fav.length === 0 ? (
+      <h1 id="fav-title">Favorites</h1>
+     {fav.length === 0 && (
         <div className="empty-message">
           <h1 id="noListings"> its lonely in here 😔 </h1>
         </div>
-      ) : (
-        fav.map((listing, i) => {
+     )} 
+     
+    {fav.length > 0 && (
+      <div className="Home-cont">
+        {fav.map((listing, i) => {
           const isFavorited = fav.some(
             (f) => f.title === listing.title && f.owner === listing.owner
           );
          
-         return(
-          <>
-         <div key={`listing-${i}`} className="listing">
-            <div className="img-cont">        
-              <NavLink to={`/favorite/${listing.id}`}>
-                <img src={listing.images[imageIndices[i] || 0]} alt={listing.title} />  
-              </NavLink>
-              {listing.images.length > 1 && (
-                <div className="img-btn-cont">
-                  <button onClick={() => handleLeft(i)}>←</button>
-                  <button onClick={() => handleRight(i)}>→</button>
-                </div>
-              )}
+          return (
+            <div key={`listing-${i}`} className="listing">
+              <div className="img-cont">        
+                <NavLink to={`/favorite/${listing.id}`}>
+                  <img src={listing.images[imageIndices[i] || 0]} alt={listing.title} />  
+                </NavLink>
+                {listing.images.length > 1 && (
+                  <div className="img-btn-cont">
+                    <button onClick={() => handleLeft(i)}>←</button>
+                    <button onClick={() => handleRight(i)}>→</button>
+                  </div>
+                )}
+              </div>
+              <div className="fav-cont">
+                <button onClick={() => setFav(listing)}>
+                  <span
+                    className={`star ${isFavorited ? 'favorite' : 'empty'}`}
+                  >
+                    {isFavorited ? '★' : '☆'}
+                  </span>
+                </button>
+              </div>
+              <h1>{listing.title}</h1>
+              <p>Lister: {listing.owner}</p>
+              <p>{listing.desc}</p>
+              <h3>{listing.location}</h3>
+              <p>{Array.isArray(listing.tags) ? listing.tags.join(", ") : listing.tags}</p>
+              <p>${listing.price}</p>
             </div>
-            <div className="fav-cont">
-            <button onClick={() => setFav(listing)}>
-            <span
-              className={`star ${isFavorited ? 'favorite' : 'empty'}`}
-               >
-               {isFavorited ? '★' : '☆'}
-            </span>
-            </button>
-            </div>
-            <h1>{listing.title}</h1>
-            <p>Lister: {listing.owner}</p>
-            <p>{listing.desc}</p>
-            <h3>{listing.location}</h3>
-            <p>{Array.isArray(listing.tags) ? listing.tags.join(", ") : listing.tags}</p>
-            <p>${listing.price}</p>
-          </div>
-          </>
-          )
-          })
-      )}
-    </div>
+          );
+        })}
+      </div>
+    )}
     </>
   );
 }

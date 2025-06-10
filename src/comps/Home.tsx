@@ -49,6 +49,13 @@ export default function Home() {
   };
 
   return ( 
+    <>
+    {filteredListings.length === 0 && (
+        <div className="empty-message">
+          <h1 id="noListings">No Listings Found</h1>
+        </div>
+    )}
+
     <div className="Home-cont">
       {/* Filter UI */}
       {listings.length > 0 && (
@@ -97,11 +104,7 @@ export default function Home() {
       )}    
 
       {/* Displaying the listings */}
-      {filteredListings.length === 0 ? (
-        <div className="empty-message">
-          <h1 id="noListings">No Listings Found</h1>
-        </div>
-      ) : (
+      {filteredListings.length > 0 && (
         filteredListings.map((listing, i) => {
           const isFavorited = fav.some(
             (f) => f.title === listing.title && f.owner === listing.owner
@@ -139,5 +142,6 @@ export default function Home() {
         })
       )}
     </div>
+    </>
   );
 }
